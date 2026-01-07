@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 from typing import List, Dict, Any, Optional
 
-from .task import Task
-from .judge import Judge
+from agentft.core.task import Task
+from agentft.core.judge import Judge
 
 
 @dataclass

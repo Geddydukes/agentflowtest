@@ -1,7 +1,7 @@
 """Tests for CompositeJudge."""
 
 import pytest
-from agentbench import Task, CompositeJudge
+from agentft import Task, CompositeJudge
 
 
 class MockJudge:

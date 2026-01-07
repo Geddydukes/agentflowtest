@@ -2,7 +2,7 @@
 
 import pytest
 from pathlib import Path
-from agentbench import (
+from agentft import (
     Task,
     ListScenario,
     RunConfig,

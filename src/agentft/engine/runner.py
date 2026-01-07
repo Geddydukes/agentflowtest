@@ -9,16 +9,16 @@ import platform
 import sys
 import os
 
-from agentbench.core.task import Task
-from agentbench.core.scenario import Scenario
-from agentbench.core.agent import AgentAdapter
-from agentbench.core.judge import Judge
-from agentbench.core.result import EvaluationResult
-from agentbench.core.cost import Cost
-from agentbench.core.trace import Trace, TraceEvent
-from agentbench.core.metadata import RunMetadata
-from agentbench.engine.storage import write_traces_jsonl, write_results_jsonl, write_metadata_json
-import agentbench
+from agentft.core.task import Task
+from agentft.core.scenario import Scenario
+from agentft.core.agent import AgentAdapter
+from agentft.core.judge import Judge
+from agentft.core.result import EvaluationResult
+from agentft.core.cost import Cost
+from agentft.core.trace import Trace, TraceEvent
+from agentft.core.metadata import RunMetadata
+from agentft.engine.storage import write_traces_jsonl, write_results_jsonl, write_metadata_json
+import agentft
 
 
 DEFAULT_RUNS_DIR = "runs"
@@ -87,7 +87,7 @@ async def run_async(config: RunConfig) -> List[EvaluationResult]:
     metadata = RunMetadata(
         run_id=run_id,
         name=config.name,
-        framework_version=agentbench.__version__,
+        framework_version=agentft.__version__,
         agent_versions={agent.name: getattr(agent, "version", "unknown") for agent in config.agents},
         scenario_versions={},
         judge_versions={},
@@ -289,7 +289,7 @@ async def run_async(config: RunConfig) -> List[EvaluationResult]:
     write_results_jsonl(results, results_path)
     write_metadata_json(metadata, metadata_path)
 
-    from agentbench.reporting.html_report import generate_html_report
+    from agentft.reporting.html_report import generate_html_report
     report_path = str(run_dir / "report.html")
     generate_html_report(metadata, results, report_path)
 

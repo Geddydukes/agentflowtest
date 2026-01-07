@@ -1,6 +1,7 @@
-"""agentbench: A simple evaluation harness for AI agents."""
+"""Agent Flow Test (AgentFT): A simple evaluation harness for AI agents."""
 
-__version__ = "0.0.1"
+__version__ = "0.1.0"
+__name__ = "Agent Flow Test (AgentFT)"
 
 from .core.task import Task
 from .core.scenario import Scenario, ListScenario

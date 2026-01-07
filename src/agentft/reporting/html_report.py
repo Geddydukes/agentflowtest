@@ -2,9 +2,9 @@ from pathlib import Path
 from typing import List, Dict, Any
 from jinja2 import Environment, FileSystemLoader
 
-from agentbench.core.result import EvaluationResult
-from agentbench.core.metadata import RunMetadata
-from agentbench.reporting.summary import build_summary
+from agentft.core.result import EvaluationResult
+from agentft.core.metadata import RunMetadata
+from agentft.reporting.summary import build_summary
 
 
 def generate_html_report(

@@ -2,8 +2,8 @@
 
 import pytest
 from datetime import datetime
-from agentbench import Task, Cost, Trace, TraceEvent
-from agentbench.core.result import EvaluationResult
+from agentft import Task, Cost, Trace, TraceEvent
+from agentft.core.result import EvaluationResult
 
 
 def test_task_creation():

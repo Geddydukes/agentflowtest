@@ -3,9 +3,9 @@ import os
 from pathlib import Path
 from typing import List, Dict, Any
 
-from agentbench.core.trace import Trace
-from agentbench.core.result import EvaluationResult
-from agentbench.core.metadata import RunMetadata
+from agentft.core.trace import Trace
+from agentft.core.result import EvaluationResult
+from agentft.core.metadata import RunMetadata
 
 
 def write_traces_jsonl(traces: List[Trace], path: str) -> None:

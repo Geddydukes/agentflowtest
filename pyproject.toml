@@ -3,11 +3,11 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/agentbench"]
+packages = ["src/agentft"]
 
 [project]
 name = "agentft"
-version = "0.0.1"
+version = "0.1.0"
 description = "Agent Flow Test (AgentFT) - A simple evaluation harness for AI agents."
 readme = "README.md"
 requires-python = ">=3.11"
@@ -31,7 +31,7 @@ dependencies = [
 ]
 
 [project.scripts]
-aft = "agentbench.cli:main"
+aft = "agentft.cli:main"
 
 [project.urls]
 Homepage = "https://github.com/geddydukes/agentflowtest"
@@ -54,7 +54,7 @@ python_classes = ["Test*"]
 python_functions = ["test_*"]
 asyncio_mode = "auto"
 addopts = [
-    "--cov=src/agentbench",
+    "--cov=src/agentft",
     "--cov-report=html:htmlcov",
     "--cov-report=term-missing",
     "--html=test-results/report.html",

@@ -1,5 +1,5 @@
 from typing import Dict, Any
-from agentbench import Judge, Task
+from agentft import Judge, Task
 
 
 class ExactMatchJudge:

@@ -1,6 +1,6 @@
-"""Example using agentbench presets for a simple math evaluation."""
+"""Example using agentft presets for a simple math evaluation."""
 
-from agentbench import RunConfig, run, build_math_basic_scenario, ExactMatchJudge, Task
+from agentft import RunConfig, run, build_math_basic_scenario, ExactMatchJudge, Task
 
 
 class SimpleMathAgent:

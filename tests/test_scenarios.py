@@ -1,7 +1,7 @@
 """Tests for Scenario and ListScenario."""
 
 import pytest
-from agentbench import Task, ListScenario
+from agentft import Task, ListScenario
 
 
 def test_list_scenario_creation():

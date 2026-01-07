@@ -1,5 +1,5 @@
 from typing import List, Dict, Any
-from agentbench.core.result import EvaluationResult
+from agentft.core.result import EvaluationResult
 
 
 def build_summary(results: List[EvaluationResult]) -> Dict[str, Any]:

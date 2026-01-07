@@ -1,6 +1,6 @@
 """Phase 3 proof of concept using core abstractions."""
 
-from agentbench import Task, ListScenario, RunConfig, run, CompositeJudge
+from agentft import Task, ListScenario, RunConfig, run, CompositeJudge
 
 
 class SimpleMathAgent:
@@ -32,7 +32,7 @@ class SimpleMathAgent:
         else:
             response = "I do not know yet"
 
-        from agentbench import Cost
+        from agentft import Cost
 
         return {"response": response, "cost": Cost.zero()}
 

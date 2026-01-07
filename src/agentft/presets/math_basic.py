@@ -1,5 +1,5 @@
 from typing import List
-from agentbench import Task, ListScenario
+from agentft import Task, ListScenario
 
 
 def build_math_basic_scenario() -> ListScenario:

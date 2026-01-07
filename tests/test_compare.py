@@ -3,7 +3,7 @@
 import json
 import tempfile
 from pathlib import Path
-from agentbench.reporting.compare import compare_runs, load_results_jsonl
+from agentft.reporting.compare import compare_runs, load_results_jsonl
 
 
 def test_load_results_jsonl():

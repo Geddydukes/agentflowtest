@@ -1,7 +1,7 @@
 """Tests for preset scenarios and judges."""
 
 import pytest
-from agentbench import build_math_basic_scenario, ExactMatchJudge, Task
+from agentft import build_math_basic_scenario, ExactMatchJudge, Task
 
 
 def test_build_math_basic_scenario():

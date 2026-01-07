@@ -1,8 +1,8 @@
 """Tests for reporting functions."""
 
 import pytest
-from agentbench.core.result import EvaluationResult
-from agentbench.reporting.summary import build_summary, print_summary
+from agentft.core.result import EvaluationResult
+from agentft.reporting.summary import build_summary, print_summary
 
 
 def test_build_summary():

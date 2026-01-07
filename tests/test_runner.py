@@ -3,13 +3,13 @@
 import pytest
 import asyncio
 from pathlib import Path
-from agentbench import (
+from agentft import (
     Task,
     ListScenario,
     RunConfig,
     RateLimit,
 )
-from agentbench.engine.runner import run_async, DEFAULT_RUNS_DIR
+from agentft.engine.runner import run_async, DEFAULT_RUNS_DIR
 
 
 class TestAgent:

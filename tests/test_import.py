@@ -2,15 +2,15 @@
 
 
 def test_import():
-    """Test that agentbench can be imported and has correct version."""
-    import agentbench
+    """Test that agentft can be imported and has correct version."""
+    import agentft
 
-    assert agentbench.__version__ == "0.0.1"
+    assert agentft.__version__ == "0.1.0"
 
 
 def test_import_presets():
     """Test that presets can be imported."""
-    from agentbench import build_math_basic_scenario, ExactMatchJudge
+    from agentft import build_math_basic_scenario, ExactMatchJudge
     
     assert build_math_basic_scenario is not None
     assert ExactMatchJudge is not None
@@ -18,7 +18,7 @@ def test_import_presets():
 
 def test_import_core_types():
     """Test that core types can be imported."""
-    from agentbench import (
+    from agentft import (
         Task,
         ListScenario,
         AgentAdapter,
