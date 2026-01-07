@@ -1,6 +1,6 @@
-# agentbench
+# Agent Flow Test (AgentFT)
 
-agentbench is an evaluation framework for AI agents. It provides core abstractions for tasks, scenarios, agents, and judges, with an async runner that supports retries, rate limiting, and comprehensive reporting.
+Agent Flow Test (AgentFT) is an evaluation framework for AI agents. It provides core abstractions for tasks, scenarios, agents, and judges, with an async runner that supports retries, rate limiting, and comprehensive reporting.
 
 ## Features
 
@@ -10,24 +10,30 @@ agentbench is an evaluation framework for AI agents. It provides core abstractio
 - **Comprehensive reporting**: HTML reports, JSONL results, traces, and metadata
 - **Run comparison**: Compare multiple runs to identify regressions and improvements
 - **Presets**: Ready-to-use scenarios and judges for quick evaluation
+- **CLI**: Command-line interface for running evaluations and viewing results
+
+## Installation
+
+```bash
+pip install agentft
+```
 
 ## Quick start
 
-Install in editable mode:
+### Using the CLI
 
 ```bash
-pip install -e .
+# Run an evaluation
+aft run --config examples/my_config.py
+
+# View summary of a run
+aft summary --run-dir runs/my_run-abc123/
+
+# Compare two runs
+aft compare --run-a runs/run1/ --run-b runs/run2/
 ```
 
-Run a simple example using presets:
-
-```bash
-python examples/math_with_presets.py
-```
-
-## Example
-
-Here's a minimal example that evaluates a simple math agent:
+### Using Python API
 
 ```python
 from agentbench import (
@@ -78,6 +84,34 @@ results = run(config)
 print(f"Got {sum(1 for r in results if r.passed)} / {len(results)} passing results.")
 ```
 
+## CLI Commands
+
+### `aft run`
+
+Run an evaluation from a Python config file.
+
+```bash
+aft run --config path/to/config.py
+```
+
+The config file should define a `RunConfig` object named `config`.
+
+### `aft summary`
+
+Show a summary of a completed run.
+
+```bash
+aft summary --run-dir runs/my_run-abc123/
+```
+
+### `aft compare`
+
+Compare two runs to identify regressions and improvements.
+
+```bash
+aft compare --run-a runs/run1/ --run-b runs/run2/
+```
+
 ## Run artifacts
 
 Running an evaluation creates a directory under `runs/<run_id>/` with:
@@ -91,7 +125,7 @@ Open `report.html` in your browser to view the detailed evaluation report.
 
 ## Testing
 
-agentbench includes a comprehensive test suite with 43+ tests covering all major components:
+AgentFT includes a comprehensive test suite with 43+ tests covering all major components:
 
 - Core types (Task, Cost, EvaluationResult, Trace)
 - Scenarios and presets
@@ -120,6 +154,11 @@ Test reports are generated in `test-results/` and coverage reports in `htmlcov/`
 
 ## Project status
 
-agentbench is in active development. The core framework is functional and ready for evaluation use cases.
+Agent Flow Test (AgentFT) is in active development. The core framework is functional and ready for evaluation use cases.
 
 **Current version: 0.0.1**
+
+## Links
+
+- **PyPI**: https://pypi.org/project/agentft/
+- **GitHub**: https://github.com/geddydukes/agentflowtest
