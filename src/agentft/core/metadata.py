@@ -9,8 +9,8 @@ class RunMetadata:
     name: str
     framework_version: str
     agent_versions: Dict[str, str]
-    scenario_versions: Dict[str, str]
-    judge_versions: Dict[str, str]
+    scenario_versions: Dict[str, Any]
+    judge_versions: Dict[str, Any]
     environment_state: Dict[str, Any]
     hardware_info: Optional[Dict[str, Any]]
     created_at: datetime

@@ -31,8 +31,7 @@ def generate_badge(passed: bool, total: int):
 
 if __name__ == "__main__":
     passed, stdout, stderr = get_test_status()
-    
-    # Count tests from output
+
     lines = stdout.split("\n")
     total = 0
     for line in lines:

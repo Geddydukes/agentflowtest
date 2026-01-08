@@ -78,7 +78,7 @@ class RateLimiter:
 
 
 async def run_async(config: RunConfig) -> List[EvaluationResult]:
-    """Phase 4 runner with lifecycle hooks, traces, retries, fail-fast, rate limiting, and reporting."""
+    """Run evaluation with lifecycle hooks, traces, retries, fail-fast, rate limiting, and reporting."""
     run_id = f"{config.name}-{uuid.uuid4().hex[:8]}"
     results: List[EvaluationResult] = []
     traces: List[Trace] = []
@@ -265,7 +265,7 @@ async def run_async(config: RunConfig) -> List[EvaluationResult]:
                                 agent_output=agent_output or {},
                                 scores=scores,
                                 passed=passed,
-                                metadata=metadata,
+                                metadata=result_metadata,
                                 cost=cost,
                                 error=error,
                                 error_type=error_type,

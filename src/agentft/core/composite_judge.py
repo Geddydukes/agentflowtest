@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 from typing import List, Dict, Any, Optional
 
-from agentft.core.task import Task
-from agentft.core.judge import Judge
+from .task import Task
+from .judge import Judge
 
 
 @dataclass
@@ -75,7 +75,7 @@ class CompositeJudge:
 
         elif self.strategy == "weighted":
             if not self.weights:
-                return self._combine_results(sub_results)  # Fallback to "all"
+                return self._combine_results(sub_results)
             weighted_scores = {}
             total_weight = 0.0
             all_passed = True
