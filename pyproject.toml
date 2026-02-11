@@ -7,7 +7,7 @@ packages = ["src/agentft"]
 
 [project]
 name = "agentft"
-version = "0.1.0"
+version = "0.2.0"
 description = "Agent Flow Test (AgentFT) - A simple evaluation harness for AI agents."
 readme = "README.md"
 requires-python = ">=3.11"
