@@ -1,5 +1,6 @@
 from typing import List
-from agentft import Task, ListScenario
+from agentft.core.task import Task
+from agentft.core.scenario import ListScenario
 
 
 def build_math_basic_scenario() -> ListScenario:
@@ -27,4 +28,3 @@ def build_math_basic_scenario() -> ListScenario:
         ),
     ]
     return ListScenario(name="math_basic", tasks=tasks)
-

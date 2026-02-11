@@ -1,6 +1,6 @@
-# Publishing agentbench to PyPI
+# Publishing agentft to PyPI
 
-This guide walks you through publishing agentbench to PyPI for the first time.
+This guide walks you through publishing agentft to PyPI for the first time.
 
 ## Prerequisites
 
@@ -12,7 +12,7 @@ This guide walks you through publishing agentbench to PyPI for the first time.
    - Go to https://pypi.org/manage/account/
    - Scroll to "API tokens"
    - Click "Add API token"
-   - Name it (e.g., "agentbench")
+   - Name it (e.g., "agentft")
    - Scope: "Entire account" (for first time) or specific project
    - Copy the token (starts with `pypi-`)
 
@@ -28,7 +28,7 @@ pip install build twine
 
 Edit `pyproject.toml` and update the version number:
 ```toml
-version = "0.0.1"
+version = "0.1.0"
 ```
 
 ### 3. Clean previous builds
@@ -44,8 +44,8 @@ python -m build
 ```
 
 This creates:
-- `dist/agentbench-0.0.1.tar.gz` (source distribution)
-- `dist/agentbench-0.0.1-py3-none-any.whl` (wheel)
+- `dist/agentft-0.1.0.tar.gz` (source distribution)
+- `dist/agentft-0.1.0-py3-none-any.whl` (wheel)
 
 ### 5. Test on Test PyPI first (recommended)
 
@@ -60,7 +60,7 @@ twine upload --repository testpypi dist/*
 
 Then test installing from Test PyPI:
 ```bash
-pip install --index-url https://test.pypi.org/simple/ agentbench
+pip install --index-url https://test.pypi.org/simple/ agentft
 ```
 
 ### 6. Publish to Production PyPI
@@ -77,8 +77,8 @@ twine upload dist/*
 ### 7. Verify Installation
 
 ```bash
-pip install agentbench
-python -c "import agentbench; print(agentbench.__version__)"
+pip install agentft
+python -c "import agentft; print(agentft.__version__)"
 ```
 
 ## Using GitHub Actions (Automated)
@@ -93,8 +93,8 @@ Once you've set up your PyPI API token:
 
 4. Create a GitHub Release:
    - Go to Releases → "Create a new release"
-   - Tag: `v0.0.1` (must match version in pyproject.toml)
-   - Title: `agentbench v0.0.1`
+   - Tag: `v0.1.0` (must match version in pyproject.toml)
+   - Title: `agentft v0.1.0`
    - Description: Release notes
    - Click "Publish release"
 
@@ -105,7 +105,7 @@ The GitHub Action will automatically build and publish to PyPI!
 For future releases:
 
 1. Update version in `pyproject.toml`
-2. Update version in `src/agentbench/__init__.py`
+2. Update version in `src/agentft/__init__.py`
 3. Commit and push
 4. Create a new GitHub release with matching tag
 5. GitHub Actions will publish automatically

@@ -1,0 +1,19 @@
+Agent Flow Test (AgentFT) - Compare Command
+==================================================
+
+Run A: runs/smoke_r1_baseline-5a5f7d3c
+  Pass rate: 100.0%
+  Passed: 4 / 4
+
+Run B: runs/smoke_r2_parallel-0e22f470
+  Pass rate: 100.0%
+  Passed: 4 / 4
+
+Delta (B - A): 0.00%
+95% CI: [0.00%, 0.00%]
+p-value: 1.0000
+
+Regressions: 0
+Improvements: 0
+Missing in Run B: 0
+Missing in Run A: 0

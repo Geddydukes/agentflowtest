@@ -1,0 +1,5 @@
+Agent Flow Test (AgentFT) - Rejudge Command
+==================================================
+Rejudged 4 rows with 1 judge(s).
+Passed: 4/4
+Output: runs/smoke_r3b_jsonl_cache-0dab5e02/rejudge_results.jsonl

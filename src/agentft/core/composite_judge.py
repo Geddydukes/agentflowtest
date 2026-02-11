@@ -20,7 +20,10 @@ class CompositeJudge:
         return f"composite[{','.join(judge_names)}]"
 
     async def score(self, task: Task, result: Dict[str, Any]) -> Dict[str, Any]:
-        """Score using all child judges and combine according to strategy."""
+        """Score using child judges and combine according to strategy."""
+        if self.strategy == "sequential":
+            return await self._score_sequential(task, result)
+
         sub_results = []
 
         for judge in self.judges:
@@ -44,10 +47,75 @@ class CompositeJudge:
 
         combined = self._combine_results(sub_results)
 
+        return self._build_response(
+            scores=combined["scores"],
+            passed=combined["pass"],
+            explanation=combined.get("explanation"),
+            sub_results=sub_results,
+        )
+
+    async def _score_sequential(self, task: Task, result: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Execute judges in-order and stop at first passing sub-judge.
+        If none pass, return the final sub-judge result.
+        """
+        sub_results = []
+
+        for judge in self.judges:
+            try:
+                sub_result = await judge.score(task, result)
+                sub_results.append({
+                    "judge": judge.name,
+                    "result": sub_result,
+                })
+            except Exception as e:
+                sub_result = {
+                    "scores": {},
+                    "pass": False,
+                    "explanation": None,
+                    "metadata": None,
+                }
+                sub_results.append({
+                    "judge": judge.name,
+                    "error": str(e),
+                    "result": sub_result,
+                })
+
+            if sub_result.get("pass", False):
+                return self._build_response(
+                    scores=sub_result.get("scores", {}),
+                    passed=True,
+                    explanation=sub_result.get("explanation"),
+                    sub_results=sub_results,
+                )
+
+        if not sub_results:
+            return self._build_response(
+                scores={},
+                passed=False,
+                explanation=None,
+                sub_results=sub_results,
+            )
+
+        final_result = sub_results[-1]["result"]
+        return self._build_response(
+            scores=final_result.get("scores", {}),
+            passed=False,
+            explanation=final_result.get("explanation"),
+            sub_results=sub_results,
+        )
+
+    def _build_response(
+        self,
+        scores: Dict[str, float],
+        passed: bool,
+        explanation: Any,
+        sub_results: List[Dict[str, Any]],
+    ) -> Dict[str, Any]:
         return {
-            "scores": combined["scores"],
-            "pass": combined["pass"],
-            "explanation": combined.get("explanation"),
+            "scores": scores,
+            "pass": passed,
+            "explanation": explanation,
             "metadata": {
                 "strategy": self.strategy,
                 "sub_judges": sub_results,
@@ -74,15 +142,13 @@ class CompositeJudge:
             return {"scores": combined_scores, "pass": any_passed}
 
         elif self.strategy == "weighted":
-            if not self.weights:
-                return self._combine_results(sub_results)
             weighted_scores = {}
             total_weight = 0.0
             all_passed = True
 
             for sub in sub_results:
                 judge_name = sub["judge"]
-                weight = self.weights.get(judge_name, 1.0)
+                weight = (self.weights or {}).get(judge_name, 1.0)
                 total_weight += weight
                 sub_scores = sub["result"].get("scores", {})
                 sub_passed = sub["result"].get("pass", False)
@@ -150,4 +216,3 @@ class CompositeJudge:
                 merged[key] /= counts[key]
 
         return merged
-

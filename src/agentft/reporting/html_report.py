@@ -1,6 +1,6 @@
 from pathlib import Path
 from typing import List, Dict, Any
-from jinja2 import Environment, FileSystemLoader
+from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 from agentft.core.result import EvaluationResult
 from agentft.core.metadata import RunMetadata
@@ -14,7 +14,10 @@ def generate_html_report(
 ) -> None:
     """Generate an HTML report from metadata and results."""
     template_dir = Path(__file__).parent.parent / "templates"
-    env = Environment(loader=FileSystemLoader(str(template_dir)))
+    env = Environment(
+        loader=FileSystemLoader(str(template_dir)),
+        autoescape=select_autoescape(["html", "htm", "xml", "j2"]),
+    )
     template = env.get_template("report.html.j2")
 
     summary = build_summary(results)
@@ -30,4 +33,3 @@ def generate_html_report(
 
     with open(output_path_obj, "w") as f:
         f.write(html_content)
-

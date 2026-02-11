@@ -1,7 +1,14 @@
 """Tests for preset scenarios and judges."""
 
 import pytest
-from agentft import build_math_basic_scenario, ExactMatchJudge, Task
+from agentft import (
+    build_math_basic_scenario,
+    build_coding_basic_scenario,
+    build_safety_basic_scenario,
+    build_tool_use_basic_scenario,
+    ExactMatchJudge,
+    Task,
+)
 
 
 def test_build_math_basic_scenario():
@@ -110,3 +117,14 @@ async def test_exact_match_judge_metadata():
     assert score["metadata"]["expected"] == "4"
     assert score["metadata"]["actual"] == "4"
 
+
+def test_additional_preset_benchmark_suites():
+    coding = build_coding_basic_scenario()
+    safety = build_safety_basic_scenario()
+    tool_use = build_tool_use_basic_scenario()
+    assert coding.name == "coding_basic"
+    assert safety.name == "safety_basic"
+    assert tool_use.name == "tool_use_basic"
+    assert len(list(coding.iter_tasks())) >= 2
+    assert len(list(safety.iter_tasks())) >= 2
+    assert len(list(tool_use.iter_tasks())) >= 1

@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import datetime
 from typing import Any, Dict, Optional
 
@@ -18,9 +18,8 @@ class EvaluationResult:
     passed: bool
     latency_ms: Optional[float] = None
     metadata: Optional[Dict[str, Any]] = None
-    created_at: datetime = datetime.utcnow()
+    created_at: datetime = field(default_factory=datetime.utcnow)
     cost: Optional[Cost] = None
     error: str | None = None
     error_type: str | None = None
     retries_attempted: int = 0
-

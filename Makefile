@@ -10,7 +10,7 @@ test-html:
 	pytest --html=test-results/report.html --self-contained-html
 
 test-cov:
-	pytest --cov=src/agentbench --cov-report=html:htmlcov --cov-report=term-missing
+	pytest --cov=src/agentft --cov-report=html:htmlcov --cov-report=term-missing
 
 test-all: test-html test-cov
 
@@ -21,4 +21,3 @@ clean:
 	rm -rf .coverage
 	find . -type d -name __pycache__ -exec rm -r {} +
 	find . -type f -name "*.pyc" -delete
-

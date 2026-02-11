@@ -2,6 +2,7 @@
 
 import pytest
 from datetime import datetime
+from dataclasses import MISSING
 from agentft import Task, Cost, Trace, TraceEvent
 from agentft.core.result import EvaluationResult
 
@@ -85,6 +86,13 @@ def test_evaluation_result_with_errors():
     assert result.retries_attempted == 2
 
 
+def test_evaluation_result_created_at_uses_default_factory():
+    """Ensure created_at uses a per-instance default factory."""
+    field = EvaluationResult.__dataclass_fields__["created_at"]
+    assert field.default is MISSING
+    assert field.default_factory is not MISSING
+
+
 def test_trace_event_creation():
     """Test TraceEvent creation."""
     event = TraceEvent(
@@ -112,4 +120,3 @@ def test_trace_creation():
     event = TraceEvent(timestamp=1234567890.0, event_type="test", data={})
     trace.events.append(event)
     assert len(trace.events) == 1
-

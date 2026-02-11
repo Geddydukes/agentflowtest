@@ -5,240 +5,281 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AgentFT Report: {{ metadata.name }}</title>
     <style>
+        :root {
+            --bg: #f2f4f8;
+            --card: #ffffff;
+            --ink: #1a2233;
+            --muted: #53607a;
+            --accent: #1b4f72;
+            --good: #1f8b4c;
+            --bad: #c23a2b;
+            --line: #dce2ed;
+        }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            max-width: 1200px;
+            margin: 0;
+            font-family: "Avenir Next", "Segoe UI", sans-serif;
+            background: radial-gradient(circle at top right, #e6eef8 0%, var(--bg) 45%);
+            color: var(--ink);
+        }
+        .wrap {
+            max-width: 1280px;
             margin: 0 auto;
-            padding: 20px;
-            background-color: #f5f5f5;
+            padding: 24px;
         }
-        .header {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        .panel {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            box-shadow: 0 6px 18px rgba(26, 34, 51, 0.07);
+            padding: 18px;
+            margin-bottom: 18px;
         }
-        h1 {
-            margin: 0 0 10px 0;
-            color: #2c3e50;
+        .title {
+            margin: 0 0 8px 0;
+            font-size: 1.6rem;
+            letter-spacing: 0.2px;
         }
-        .run-id {
-            color: #7f8c8d;
-            font-family: monospace;
-            font-size: 0.9em;
+        .muted {
+            color: var(--muted);
+            font-family: ui-monospace, Menlo, Monaco, monospace;
+            font-size: 0.9rem;
         }
         .stats {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-bottom: 20px;
+            gap: 12px;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
         }
-        .stat-card {
-            background: white;
-            padding: 20px;
+        .stat {
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 12px;
+            background: linear-gradient(180deg, #fff, #f9fbff);
+        }
+        .stat .k {
+            font-size: 0.82rem;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+        .stat .v {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-top: 4px;
+        }
+        .good { color: var(--good); }
+        .bad { color: var(--bad); }
+        .controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 10px;
+            align-items: end;
+        }
+        .controls label {
+            font-size: 0.78rem;
+            color: var(--muted);
+            display: block;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .controls input,
+        .controls select {
+            width: 100%;
+            border: 1px solid var(--line);
             border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .stat-value {
-            font-size: 2em;
-            font-weight: bold;
-            color: #2c3e50;
-        }
-        .stat-label {
-            color: #7f8c8d;
-            font-size: 0.9em;
-            margin-top: 5px;
-        }
-        .pass-rate {
-            color: #27ae60;
-        }
-        .fail-rate {
-            color: #e74c3c;
+            padding: 8px 10px;
+            font-size: 0.9rem;
+            box-sizing: border-box;
         }
         table {
             width: 100%;
             border-collapse: collapse;
-            background: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
+            font-size: 0.92rem;
         }
-        th {
-            background: #34495e;
-            color: white;
-            padding: 12px;
+        thead th {
             text-align: left;
-            font-weight: 600;
+            color: #fff;
+            background: var(--accent);
+            padding: 10px 8px;
+            position: sticky;
+            top: 0;
         }
-        td {
-            padding: 12px;
-            border-bottom: 1px solid #ecf0f1;
+        tbody td {
+            border-bottom: 1px solid var(--line);
+            padding: 9px 8px;
+            vertical-align: top;
         }
-        tr:hover {
-            background-color: #f8f9fa;
+        tbody tr:hover {
+            background: #f8fbff;
         }
-        .status-pass {
-            color: #27ae60;
-            font-weight: bold;
+        .hidden {
+            display: none;
         }
-        .status-fail {
-            color: #e74c3c;
-            font-weight: bold;
-        }
-        .section {
-            margin-bottom: 30px;
-        }
-        .section-title {
-            font-size: 1.5em;
-            margin-bottom: 15px;
-            color: #2c3e50;
-        }
-        .metadata {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            font-size: 0.9em;
-        }
-        .metadata dt {
-            font-weight: bold;
-            margin-top: 10px;
-            color: #2c3e50;
-        }
-        .metadata dd {
-            margin-left: 20px;
-            color: #7f8c8d;
-            font-family: monospace;
+        .details {
+            margin-top: 4px;
+            color: var(--muted);
+            white-space: pre-wrap;
+            font-family: ui-monospace, Menlo, Monaco, monospace;
+            font-size: 0.8rem;
         }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>AgentFT Report</h1>
-        <div class="run-id">Run: {{ metadata.name }} ({{ metadata.run_id }})</div>
-    </div>
+    <div class="wrap">
+        <section class="panel">
+            <h1 class="title">AgentFT Report</h1>
+            <div class="muted">Run: {{ metadata.name }} ({{ metadata.run_id }})</div>
+            <div class="muted">Schema: {{ metadata.artifact_schema_version }} | Status: {{ metadata.status }}</div>
+        </section>
 
-    <div class="stats">
-        <div class="stat-card">
-            <div class="stat-value">{{ summary.total }}</div>
-            <div class="stat-label">Total Tasks</div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-value pass-rate">{{ summary.passed }}</div>
-            <div class="stat-label">Passed</div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-value fail-rate">{{ summary.total - summary.passed }}</div>
-            <div class="stat-label">Failed</div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-value {% if summary.pass_rate >= 0.8 %}pass-rate{% else %}fail-rate{% endif %}">
-                {{ "%.1f"|format(summary.pass_rate * 100) }}%
+        <section class="panel stats">
+            <div class="stat"><div class="k">Total</div><div class="v">{{ summary.total }}</div></div>
+            <div class="stat"><div class="k">Passed</div><div class="v good">{{ summary.passed }}</div></div>
+            <div class="stat"><div class="k">Failed</div><div class="v bad">{{ summary.total - summary.passed }}</div></div>
+            <div class="stat">
+                <div class="k">Pass Rate</div>
+                <div class="v {% if summary.pass_rate >= 0.8 %}good{% else %}bad{% endif %}">
+                    {{ "%.1f"|format(summary.pass_rate * 100) }}%
+                </div>
             </div>
-            <div class="stat-label">Pass Rate</div>
-        </div>
-    </div>
+            <div class="stat"><div class="k">Cost USD</div><div class="v">{{ "%.6f"|format(summary.total_cost_usd or 0.0) }}</div></div>
+            <div class="stat"><div class="k">Avg Latency</div><div class="v">{{ "%.2f"|format(summary.avg_latency_ms or 0.0) }} ms</div></div>
+        </section>
 
-    <div class="section">
-        <div class="section-title">Per Agent Performance</div>
-        <table>
-            <thead>
-                <tr>
-                    <th>Agent</th>
-                    <th>Total</th>
-                    <th>Passed</th>
-                    <th>Failed</th>
-                    <th>Pass Rate</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for agent, stats in summary.per_agent.items() %}
-                <tr>
-                    <td>{{ agent }}</td>
-                    <td>{{ stats.total }}</td>
-                    <td class="status-pass">{{ stats.passed }}</td>
-                    <td class="status-fail">{{ stats.total - stats.passed }}</td>
-                    <td>{{ "%.1f"|format((stats.passed / stats.total * 100) if stats.total > 0 else 0) }}%</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
-
-    {% set failing_tasks = results | selectattr("passed", "equalto", false) | list %}
-    {% if failing_tasks %}
-    <div class="section">
-        <div class="section-title">Failing Tasks</div>
-        <table>
-            <thead>
-                <tr>
-                    <th>Task ID</th>
-                    <th>Agent</th>
-                    <th>Judge</th>
-                    <th>Scores</th>
-                    <th>Error</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for result in failing_tasks %}
-                <tr>
-                    <td>{{ result.task_id }}</td>
-                    <td>{{ result.agent }}</td>
-                    <td>{{ result.judge }}</td>
-                    <td>
-                        {% for key, value in result.scores.items() %}
-                            {{ key }}: {{ "%.2f"|format(value) }}{% if not loop.last %}, {% endif %}
+        <section class="panel">
+            <h2 class="title" style="font-size:1.1rem">Filters</h2>
+            <div class="controls">
+                <div>
+                    <label for="f-agent">Agent</label>
+                    <select id="f-agent">
+                        <option value="">All</option>
+                        {% for agent, _ in summary.per_agent.items() %}
+                        <option value="{{ agent }}">{{ agent }}</option>
                         {% endfor %}
-                    </td>
-                    <td>
-                        {% if result.error %}
-                            <span class="status-fail">{{ result.error }}</span>
-                        {% else %}
-                            <span class="status-fail">Failed</span>
-                        {% endif %}
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
-    {% endif %}
+                    </select>
+                </div>
+                <div>
+                    <label for="f-scenario">Scenario</label>
+                    <select id="f-scenario">
+                        <option value="">All</option>
+                        {% for scenario, _ in summary.per_scenario.items() %}
+                        <option value="{{ scenario }}">{{ scenario }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div>
+                    <label for="f-status">Status</label>
+                    <select id="f-status">
+                        <option value="">All</option>
+                        <option value="pass">Pass</option>
+                        <option value="fail">Fail</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="f-query">Search Task/Error</label>
+                    <input id="f-query" type="text" placeholder="task id or error text" />
+                </div>
+            </div>
+        </section>
 
-    <div class="section">
-        <div class="section-title">Run Metadata</div>
-        <div class="metadata">
-            <dl>
-                <dt>Framework Version</dt>
-                <dd>{{ metadata.framework_version }}</dd>
-                
-                <dt>Created At</dt>
-                <dd>{{ metadata.created_at }}</dd>
-                
-                {% if metadata.git_commit %}
-                <dt>Git Commit</dt>
-                <dd>{{ metadata.git_commit }}</dd>
-                {% endif %}
-                
-                <dt>Agent Versions</dt>
-                <dd>
-                    {% for agent, version in metadata.agent_versions.items() %}
-                        {{ agent }}: {{ version }}{% if not loop.last %}<br>{% endif %}
+        <section class="panel">
+            <h2 class="title" style="font-size:1.1rem">Per Agent Performance</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Agent</th>
+                        <th>Total</th>
+                        <th>Passed</th>
+                        <th>Failed</th>
+                        <th>Pass Rate</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for agent, stats in summary.per_agent.items() %}
+                    <tr>
+                        <td>{{ agent }}</td>
+                        <td>{{ stats.total }}</td>
+                        <td class="good">{{ stats.passed }}</td>
+                        <td class="bad">{{ stats.total - stats.passed }}</td>
+                        <td>{{ "%.1f"|format((stats.passed / stats.total * 100) if stats.total > 0 else 0) }}%</td>
+                    </tr>
                     {% endfor %}
-                </dd>
-                
-                <dt>Environment</dt>
-                <dd>
-                    {% for key, value in metadata.environment_state.items() %}
-                        {{ key }}: {{ value }}{% if not loop.last %}<br>{% endif %}
+                </tbody>
+            </table>
+        </section>
+
+        <section class="panel">
+            <h2 class="title" style="font-size:1.1rem">Result Drilldown</h2>
+            <table id="results-table">
+                <thead>
+                    <tr>
+                        <th>Scenario</th>
+                        <th>Task</th>
+                        <th>Agent</th>
+                        <th>Judge</th>
+                        <th>Status</th>
+                        <th>Latency (ms)</th>
+                        <th>Error</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for result in results %}
+                    <tr
+                        data-agent="{{ result.agent }}"
+                        data-scenario="{{ result.scenario }}"
+                        data-status="{% if result.passed %}pass{% else %}fail{% endif %}"
+                        data-search="{{ result.task_id }} {{ result.error or '' }}"
+                    >
+                        <td>{{ result.scenario }}</td>
+                        <td>{{ result.task_id }}</td>
+                        <td>{{ result.agent }}</td>
+                        <td>{{ result.judge }}</td>
+                        <td class="{% if result.passed %}good{% else %}bad{% endif %}">
+                            {% if result.passed %}PASS{% else %}FAIL{% endif %}
+                        </td>
+                        <td>{{ "%.2f"|format(result.latency_ms or 0.0) }}</td>
+                        <td>
+                            {% if result.error %}
+                            <div class="bad">{{ result.error }}</div>
+                            {% if result.error_type %}
+                            <div class="details">{{ result.error_type }}</div>
+                            {% endif %}
+                            {% else %}
+                            <span class="muted">-</span>
+                            {% endif %}
+                        </td>
+                    </tr>
                     {% endfor %}
-                </dd>
-            </dl>
-        </div>
+                </tbody>
+            </table>
+        </section>
     </div>
+    <script>
+        (function () {
+            const rows = Array.from(document.querySelectorAll("#results-table tbody tr"));
+            const fAgent = document.getElementById("f-agent");
+            const fScenario = document.getElementById("f-scenario");
+            const fStatus = document.getElementById("f-status");
+            const fQuery = document.getElementById("f-query");
+
+            function applyFilters() {
+                const a = (fAgent.value || "").toLowerCase();
+                const s = (fScenario.value || "").toLowerCase();
+                const st = (fStatus.value || "").toLowerCase();
+                const q = (fQuery.value || "").toLowerCase().trim();
+
+                for (const row of rows) {
+                    const okAgent = !a || (row.dataset.agent || "").toLowerCase() === a;
+                    const okScenario = !s || (row.dataset.scenario || "").toLowerCase() === s;
+                    const okStatus = !st || (row.dataset.status || "").toLowerCase() === st;
+                    const okQuery = !q || (row.dataset.search || "").toLowerCase().includes(q);
+                    row.classList.toggle("hidden", !(okAgent && okScenario && okStatus && okQuery));
+                }
+            }
+
+            [fAgent, fScenario, fStatus].forEach((el) => el.addEventListener("change", applyFilters));
+            fQuery.addEventListener("input", applyFilters);
+        })();
+    </script>
 </body>
 </html>
-

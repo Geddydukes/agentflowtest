@@ -1,0 +1,15 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/geddydukes/Desktop/dev/ML_AI/agentbench/src/agentft/cli.py", line 862, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/Users/geddydukes/Desktop/dev/ML_AI/agentbench/src/agentft/cli.py", line 843, in main
+    return cmd_rejudge(args)
+           ^^^^^^^^^^^^^^^^^
+  File "/Users/geddydukes/Desktop/dev/ML_AI/agentbench/src/agentft/cli.py", line 382, in cmd_rejudge
+    results = rejudge_cached_outputs(str(run_dir), config.judges, output_filename=output_name)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/geddydukes/Desktop/dev/ML_AI/agentbench/src/agentft/reporting/rejudge.py", line 22, in rejudge_cached_outputs
+    raise FileNotFoundError(f"Cached outputs not found: {cache_path}")
+FileNotFoundError: Cached outputs not found: runs/smoke_r3_sqlite_cache-5890a078/agent_outputs.jsonl

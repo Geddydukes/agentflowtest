@@ -15,4 +15,8 @@ class RunMetadata:
     hardware_info: Optional[Dict[str, Any]]
     created_at: datetime
     git_commit: Optional[str]
-
+    artifact_schema_version: str = "1.1.0"
+    status: str = "completed"
+    ended_at: Optional[datetime] = None
+    resumed_from_run_id: Optional[str] = None
+    seed: Optional[int] = None

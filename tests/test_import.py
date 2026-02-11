@@ -29,9 +29,38 @@ def test_import_core_types():
         TraceEvent,
         RunConfig,
         RateLimit,
+        discover_plugins,
+        rejudge_cached_outputs,
+        RegressionGateConfig,
+        evaluate_regression_gate,
+        analyze_results,
+        merge_run_dirs,
+        rank_agents_elo,
+        export_run_to_parquet,
+        CSVScenario,
+        JSONLScenario,
+        HuggingFaceScenario,
+        EpisodeScenario,
+        rollout_environment,
+        JsonlRunEventSink,
+        build_coding_basic_scenario,
     )
     
     assert Task is not None
     assert ListScenario is not None
     assert RunConfig is not None
-
+    assert discover_plugins is not None
+    assert rejudge_cached_outputs is not None
+    assert RegressionGateConfig is not None
+    assert evaluate_regression_gate is not None
+    assert analyze_results is not None
+    assert merge_run_dirs is not None
+    assert rank_agents_elo is not None
+    assert export_run_to_parquet is not None
+    assert CSVScenario is not None
+    assert JSONLScenario is not None
+    assert HuggingFaceScenario is not None
+    assert EpisodeScenario is not None
+    assert rollout_environment is not None
+    assert JsonlRunEventSink is not None
+    assert build_coding_basic_scenario is not None

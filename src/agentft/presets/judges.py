@@ -1,5 +1,5 @@
 from typing import Dict, Any
-from agentft import Judge, Task
+from agentft.core.task import Task
 
 
 class ExactMatchJudge:
@@ -31,4 +31,3 @@ class ExactMatchJudge:
             "explanation": None,
             "metadata": {"expected": expected_str, "actual": actual_str},
         }
-

@@ -1,0 +1,12 @@
+Agent Flow Test (AgentFT) - Analyze Command
+==================================================
+Total: 4
+Passed: 4
+Pass rate: 100.00%
+Macro scenario pass rate: 100.00%
+Total cost: $0.000000
+Avg latency (ms): 0.00
+Agents: 1
+Scenarios: 1
+Judges: 1
+Wrote analytics JSON: tmp/smoke/r3_analytics.json

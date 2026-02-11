@@ -1,0 +1,80 @@
+{
+  "total": 4,
+  "passed": 4,
+  "pass_rate": 1.0,
+  "pass_rate_ci_95_wilson": [
+    0.5101091635454027,
+    1.0
+  ],
+  "total_cost_usd": 0.0,
+  "avg_latency_ms": 0.002416500137769617,
+  "latency_percentiles_ms": {
+    "p50": 0.0010000003385357559,
+    "p95": 0.0010830008250195533,
+    "p99": 0.0010830008250195533
+  },
+  "macro_pass_rate_scenario": 1.0,
+  "aggregation_level": "judge",
+  "task_pass_rule": "all",
+  "per_error_type": {},
+  "per_agent": {
+    "simple_math_agent": {
+      "total": 4,
+      "passed": 4,
+      "pass_rate": 1.0,
+      "total_cost_usd": 0,
+      "avg_latency_ms": 0.002416500137769617
+    }
+  },
+  "per_scenario": {
+    "math_basic": {
+      "total": 4,
+      "passed": 4,
+      "pass_rate": 1.0,
+      "total_cost_usd": 0,
+      "avg_latency_ms": 0.002416500137769617
+    }
+  },
+  "per_judge": {
+    "exact_match": {
+      "total": 4,
+      "passed": 4,
+      "pass_rate": 1.0,
+      "total_cost_usd": 0,
+      "avg_latency_ms": 0.002416500137769617
+    }
+  },
+  "summary": {
+    "total": 4,
+    "passed": 4,
+    "pass_rate": 1.0,
+    "total_cost_usd": 0.0,
+    "avg_latency_ms": 0.002416500137769617,
+    "latency_percentiles_ms": {
+      "p50": 0.0010000003385357559,
+      "p95": 0.0010830008250195533,
+      "p99": 0.0010830008250195533
+    },
+    "per_agent": {
+      "simple_math_agent": {
+        "total": 4,
+        "passed": 4,
+        "total_cost_usd": 0.0,
+        "pass_rate": 1.0,
+        "avg_latency_ms": 0.002416500137769617
+      }
+    },
+    "per_scenario": {
+      "math_basic": {
+        "total": 4,
+        "passed": 4,
+        "total_cost_usd": 0.0,
+        "pass_rate": 1.0,
+        "avg_latency_ms": 0.002416500137769617
+      }
+    },
+    "per_error_type": {},
+    "aggregation_level": "judge",
+    "task_pass_rule": "all"
+  }
+}
