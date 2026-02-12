@@ -1,11 +1,16 @@
 """Basic import test to verify package installation."""
 
+from pathlib import Path
+import tomllib
+
 
 def test_import():
     """Test that agentft can be imported and has correct version."""
     import agentft
 
-    assert agentft.__version__ == "0.1.0"
+    pyproject = tomllib.loads(Path("pyproject.toml").read_text(encoding="utf-8"))
+    expected_version = pyproject["project"]["version"]
+    assert agentft.__version__ == expected_version
 
 
 def test_import_presets():
